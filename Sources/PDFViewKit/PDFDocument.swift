@@ -23,6 +23,15 @@ public struct PDFDocument {
 
 }
 
+// MARK: Default page size for result builders
+
+private extension PDFDocument {
+
+    /// The default size used for pages implicitly created from views.
+    static let defaultPageSize: PageSize = DIN.a4
+
+}
+
 // MARK: - PDFPagesBuilder
 
 @resultBuilder
@@ -42,7 +51,10 @@ public enum PDFPagesBuilder {
     }
 
     public static func buildPartialBlock(first: some View) -> [PDFPage<AnyView>] {
-        [PDFPage(erasing: first)]
+        [PDFPage(
+            size: PDFDocument.defaultPageSize,
+            erasing: first
+        )]
     }
 
     public static func buildPartialBlock(
@@ -50,7 +62,10 @@ public enum PDFPagesBuilder {
         next: some View
     ) -> [PDFPage<AnyView>] {
         var pages = accumulated
-        pages.append(PDFPage(erasing: next))
+        pages.append(PDFPage(
+            size: PDFDocument.defaultPageSize,
+            erasing: next
+        ))
         return pages
     }
 
@@ -73,7 +88,7 @@ public enum PDFDocumentBuilder {
 
     public static func buildPartialBlock(first: some View) -> PDFDocument {
         PDFDocument {
-            PDFPage {
+            PDFPage(size: PDFDocument.defaultPageSize) {
                 first
             }
         }
@@ -81,7 +96,10 @@ public enum PDFDocumentBuilder {
 
     public static func buildPartialBlock(accumulated: PDFDocument, next: some View) -> PDFDocument {
         var pages = accumulated.pages
-        pages.append(PDFPage(erasing: next))
+        pages.append(PDFPage(
+            size: PDFDocument.defaultPageSize,
+            erasing: next
+        ))
         return PDFDocument(pages: pages)
     }
 

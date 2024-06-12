@@ -31,7 +31,7 @@ do {
     try PDFRenderer.render(
         document: document,
         at: destination,
-        atPageSize: .a4
+        atPageSize: DIN.a4
     )
 } catch {
     ...

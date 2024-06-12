@@ -8,8 +8,10 @@
 
 import Foundation
 
-// Source: https://de.wikipedia.org/wiki/Papierformat#Internationale_Papierformate_(ISO/DIN)
+/// Defines standard page sizes in the german DIN system.
 public enum DIN {
+
+    // Source: https://de.wikipedia.org/wiki/Papierformat#Internationale_Papierformate_(ISO/DIN)
 
     case a0
     case a1
@@ -25,11 +27,11 @@ public enum DIN {
 
 }
 
-// MARK: Physical page sizes
+// MARK: PageSize
 
-public extension DIN {
+extension DIN: PageSize {
 
-    var width: Measurement<UnitLength> {
+    public var width: Measurement<UnitLength> {
         switch self {
         case .a0:
             Measurement(
@@ -99,7 +101,7 @@ public extension DIN {
         }
     }
 
-    var height: Measurement<UnitLength> {
+    public var height: Measurement<UnitLength> {
         switch self {
         case .a0:
             Measurement(
@@ -166,23 +168,6 @@ public extension DIN {
                 unit: .millimeters
             )
         }
-    }
-
-}
-
-// MARK: Calculated properties based on physical sizes
-
-public extension DIN {
-
-    var aspectRatio: CGFloat {
-        width.converted(to: .millimeters).value / height.converted(to: .millimeters).value
-    }
-
-    func size(atDPI dpi: DPI) -> CGSize {
-        CGSize(
-            width: width.converted(to: .inches).value * dpi.rawValue,
-            height: height.converted(to: .inches).value * dpi.rawValue
-        )
     }
 
 }

@@ -10,7 +10,7 @@ import SwiftUI
 
 private struct ApplyPDFSizeFrameModifier: ViewModifier {
 
-    public let size: DIN
+    public let size: PageSize
 
     @Environment(\.pdfRenderingDPI)
     private var pdfRenderingDPI
@@ -32,7 +32,7 @@ extension View {
     /// Applies the given PDF size to the view's frame, taking the current DPI setting into account.
     ///
     /// - Seealso: ``PDFRenderingDPIEnvironmentKey``
-    func applyPDFSizeFrame(size: DIN) -> some View {
+    func applyPDFSizeFrame(size: PageSize) -> some View {
         modifier(ApplyPDFSizeFrameModifier(size: size))
     }
 

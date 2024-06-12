@@ -13,7 +13,7 @@ public enum PDFRenderer {
     public static func render(
         document: PDFDocument,
         to destination: URL,
-        atPageSize pageSize: DIN
+        atPageSize pageSize: some PageSize
     ) throws {
         let pdfSize = pageSize.size(atDPI: .print)
         let viewRenderingDPI: DPI = .display

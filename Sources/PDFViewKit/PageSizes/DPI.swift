@@ -8,9 +8,11 @@
 
 import Foundation
 
+/// Defines specific dots per inch resolutions.
 public enum DPI: CGFloat {
 
     // based on https://www.adobe.com/uk/creativecloud/photography/discover/dots-per-inch-dpi-resolution.html
+
     case display = 96
     case displayHigh = 144 // 150%
 

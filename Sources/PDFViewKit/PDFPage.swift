@@ -14,12 +14,12 @@ import SwiftUI
 /// The alignment of the page's content is top leading.
 public struct PDFPage<Content: View>: View {
 
-    public let size: DIN
+    public let size: PageSize
 
     public let content: Content
 
     public init(
-        size: DIN = .a4,
+        size: PageSize,
         @ViewBuilder _ content: () -> Content
     ) {
         self.size = size
@@ -53,8 +53,13 @@ public extension PDFPage where Content == AnyView {
         }
     }
 
-    init(erasing view: some View) {
-        self.init(erasing: PDFPage({ AnyView(erasing: view) }))
+    init(
+        size: PageSize,
+        erasing view: some View
+    ) {
+        self.init(erasing: PDFPage(size: size) {
+            AnyView(erasing: view)
+        })
     }
 
 }
@@ -62,7 +67,7 @@ public extension PDFPage where Content == AnyView {
 // MARK: - Previews
 
 #Preview {
-    PDFPage {
+    PDFPage(size: DIN.a4) {
         Text("Hello, World")
     }
 }

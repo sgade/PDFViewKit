@@ -19,7 +19,7 @@ do {
     try PDFRenderer.render(
         document: document,
         to: destination,
-        atPageSize: .a4
+        atPageSize: DIN.a4
     )
 
     print("PDF written to \(destination.absoluteString).")
