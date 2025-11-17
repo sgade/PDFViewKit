@@ -9,7 +9,7 @@
 import Foundation
 
 /// A type that defines page sizes.
-public protocol PageSize {
+public protocol PageSize: Sendable {
     
     /// The page's physical width.
     var width: Measurement<UnitLength> { get }

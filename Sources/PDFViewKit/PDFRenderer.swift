@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@MainActor
 public enum PDFRenderer {
 
     public static func render(
@@ -29,27 +30,25 @@ public enum PDFRenderer {
             throw Error.unableToCreateContext
         }
 
-        MainActor.assumeIsolated {
-            for page in document.pages {
-                let renderedView = page.body
-                    .environment(\.renderingEnvironment, .toPDF)
-                    .environment(\.pdfRenderingDPI, viewRenderingDPI)
+        for page in document.pages {
+            let renderedView = page.body
+                .environment(\.renderingEnvironment, .toPDF)
+                .environment(\.pdfRenderingDPI, viewRenderingDPI)
 
-                let renderer = ImageRenderer(content: renderedView)
-                renderer.proposedSize = ProposedViewSize(viewSize)
+            let renderer = ImageRenderer(content: renderedView)
+            renderer.proposedSize = ProposedViewSize(viewSize)
 
-                renderer.render(rasterizationScale: scaleFactor) { _, renderer in
-                    context.beginPDFPage(nil)
+            renderer.render(rasterizationScale: scaleFactor) { _, renderer in
+                context.beginPDFPage(nil)
 
-                    context.scaleBy(
-                        x: scaleFactor,
-                        y: scaleFactor
-                    )
+                context.scaleBy(
+                    x: scaleFactor,
+                    y: scaleFactor
+                )
 
-                    renderer(context)
+                renderer(context)
 
-                    context.endPDFPage()
-                }
+                context.endPDFPage()
             }
         }
 

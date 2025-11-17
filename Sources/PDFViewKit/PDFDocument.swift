@@ -34,6 +34,7 @@ private extension PDFDocument {
 
 // MARK: - PDFPagesBuilder
 
+@MainActor
 @resultBuilder
 public enum PDFPagesBuilder {
 
@@ -71,6 +72,7 @@ public enum PDFPagesBuilder {
 
 }
 
+@MainActor
 @resultBuilder
 public enum PDFDocumentBuilder {
 

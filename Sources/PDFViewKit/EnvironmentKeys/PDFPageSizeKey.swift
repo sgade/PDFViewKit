@@ -8,21 +8,10 @@
 
 import SwiftUI
 
-struct PDFPageSizeKey: EnvironmentKey {
-
-    static var defaultValue: PageSize = DIN.a4
-
-}
-
-// MARK: - EnvironmentValues shorthand extension
-
 public extension EnvironmentValues {
 
-    var pdfPageSize: PageSize {
-        get { self[PDFPageSizeKey.self] }
-        set { self[PDFPageSizeKey.self] = newValue }
-    }
-
+    @Entry
+    var pdfPageSize: PageSize = DIN.a4
 }
 
 // MARK: - View extension

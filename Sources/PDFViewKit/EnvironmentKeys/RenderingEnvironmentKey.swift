@@ -8,20 +8,10 @@
 
 import SwiftUI
 
-public struct RenderingEnvironmentKey: EnvironmentKey {
-
-    public static var defaultValue: RenderingEnvironment = .default
-
-}
-
-// MARK: - EnvironmentValues shorthand extension
-
 public extension EnvironmentValues {
 
-    var renderingEnvironment: RenderingEnvironment {
-        get { self[RenderingEnvironmentKey.self] }
-        set { self[RenderingEnvironmentKey.self] = newValue }
-    }
+    @Entry
+    var renderingEnvironment: RenderingEnvironment = .default
 
 }
 
