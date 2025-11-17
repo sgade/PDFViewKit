@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "PDFViewKit",
     platforms: [
-        .iOS(.v13),
+        .iOS(.v16),
         .macOS(.v13)
     ],
     products: [
